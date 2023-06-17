@@ -26,7 +26,7 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 
-          changelog="${{ CHANGELOG }}"
+          changelog="${CHANGELOG}"
 
           # Because of the 2000 char limit in Discord shorten the changelog
 

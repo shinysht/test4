@@ -21,12 +21,12 @@ jobs:
         shell: bash
         run: |
           CHANGELOG=$(sed '/___/Q' CHANGELOG.md)
-          echo "Changelog:\n${CHANGELOG}"
+          echo "Changelog:\n$CHANGELOG"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 
-          changelog="${{ $CHANGELOG }}"
+          changelog="${{ CHANGELOG }}"
 
           # Because of the 2000 char limit in Discord shorten the changelog
 

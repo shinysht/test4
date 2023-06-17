@@ -66,14 +66,13 @@ jobs:
       - name: Changelog output
         shell: bash
         run: |
-          echo '''
-          "@here"
-          "## Skyblocker 1.10.0"
-          ""
-          "## Changelog"
-          "${{ steps.read_changelog.outputs.changelog }}"
-          ":inbox_tray: Download latest version on Modrinth or Github:"
-          "<:modrinth:900697862206287882> <link1>"
-          "<:github:900697885706952725> <link2>"
-          ""
-          "<https://hysky.de/>" '''
+          echo "@here"
+          echo "## Skyblocker 1.10.0"
+          echo ""
+          echo "## Changelog"
+          echo "${{ steps.read_changelog.outputs.changelog }}"
+          echo ":inbox_tray: Download latest version on Modrinth or Github:"
+          echo "<:modrinth:900697862206287882> <link1>"
+          echo "<:github:900697885706952725> <link2>"
+          echo ""
+          echo "<https://hysky.de/>"

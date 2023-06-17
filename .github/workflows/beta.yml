@@ -22,9 +22,6 @@ jobs:
         run: |
           CHANGELOG=$(sed '/___/Q' CHANGELOG.md)
           echo "Changelog:\n$CHANGELOG"
-          CHANGELOG="${CHANGELOG//'%'/'%25'}"
-          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 
           changelog="${CHANGELOG}"
 
@@ -34,11 +31,11 @@ jobs:
           delete_chars=$((${#changelog} + 350 - 2000 - 15))
 
           # Extract the "What's Changed" section from the changelog
-          changed_section=$(echo $changelog | awk '/## What'\''s Changed/{flag=1;next}/^$/{flag=0}flag')
+          changed_section=$(echo "$changelog" | awk '/## What'\''s Changed/{flag=1;next}/^$/{flag=0}flag')
 
           # Trim the changed_section based on the delete_chars value and remove the last line
-          modified_section=${changed_section::-$delete_chars} 
-          modified_section=$(echo $modified_section | sed '$d')
+          modified_section="${changed_section::-delete_chars}"
+          modified_section=$(echo "$modified_section" | sed '$d')
 
           # Add "[...] and more" at the end of modified_section
           modified_section+="\n[...] and more"
@@ -59,6 +56,10 @@ jobs:
 
           # Store the modified_changelog in the CHANGELOG variable
           CHANGELOG=$(echo -n "$modified_changelog")
+          
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
 
           echo "::set-output name=changelog::$CHANGELOG"
 

@@ -1,3 +1,21 @@
+# Release 1.9.1
+
+## What's Changed
+* Fix trivia solver glitch by @TheColdPot in https://github.com/SkyblockerMod/Skyblocker/pull/89
+* optimize Dwarven HUD & add draggable config by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/93
+* Use official hypixel wiki for WikiLookup by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/94
+* Corrections + Update by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/99
+* Fix Fetchur solver not working by adding typo'ed variant by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/100
+* Update GSON and remove old adapter by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/95
+
+## New Contributors
+* @TheColdPot made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/89
+* @Julienraptor01 made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/99
+* @MiraculixxT made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/111
+
+**Full Changelog**: https://github.com/SkyblockerMod/Skyblocker/compare/v1.8.2...v1.9.0
+
+___
 # Release 1.9.0
 
 Supports 1.19.4

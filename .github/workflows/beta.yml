@@ -65,6 +65,7 @@ jobs:
       - name: Changelog output other
         shell: bash
         run: |
+          echo "## Changelog"
           echo "${{ steps.read_changelog.outputs.changelog }}"
           
       - name: Changelog output

@@ -23,7 +23,11 @@ jobs:
           CHANGELOG=$(sed '/___/Q' CHANGELOG.md)
           CHANGELOG=$(echo "$CHANGELOG" | sed 1d)
           
-          echo "::set-output name=changelog::$CHANGELOG"
+          CHANGELOGtmp="${CHANGELOG//'%'/'%25'}"
+          CHANGELOGtmp="${CHANGELOGtmp//$'\n'/'%0A'}"
+          CHANGELOGtmp="${CHANGELOGtmp//$'\r'/'%0D'}"
+          
+          echo "::set-output name=changelog::$CHANGELOGtmp"
           
           echo "Changelog:\n$CHANGELOG"
           changelog="${CHANGELOG}"

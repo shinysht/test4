@@ -14,7 +14,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Read Changelog
         id: read_changelog
@@ -58,7 +58,7 @@ jobs:
           CHANGELOG_discord="${CHANGELOG_discord//$'\r'/'%0D'}"
           
           echo "::set-output name=changelog::$CHANGELOG"
-          echo "::set-output name=changelog_discord::$CHANGELOG_discord"
+
 
       - name: Changelog output
         shell: bash

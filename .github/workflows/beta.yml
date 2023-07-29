@@ -50,15 +50,15 @@ jobs:
               modified_changelog=$(echo "$modified_changelog" | sed -e 's/@//g' -e 's|https\?://[^[:space:]]*|<\0>|g')
           
           # Store the modified_changelog in the CHANGELOG variable
-          CHANGELOG-discord=$(echo -n "$modified_changelog")
+          CHANGELOG_discord=$(echo -n "$modified_changelog")
           fi
           
-          CHANGELOG-discord="${CHANGELOG-discord//'%'/'%25'}"
-          CHANGELOG-discord="${CHANGELOG-discord//$'\n'/'%0A'}"
-          CHANGELOG-discord="${CHANGELOG-discord//$'\r'/'%0D'}"
+          CHANGELOG_discord="${CHANGELOG_discord//'%'/'%25'}"
+          CHANGELOG_discord="${CHANGELOG_discord//$'\n'/'%0A'}"
+          CHANGELOG_discord="${CHANGELOG_discord//$'\r'/'%0D'}"
           
           echo "::set-output name=changelog::$changelog"
-          echo "::set-output name=changelog-discord::$CHANGELOG-discord"
+          echo "::set-output name=changelog_discord::$CHANGELOG_discord"
 
       - name: Changelog output
         shell: bash
@@ -67,7 +67,7 @@ jobs:
           echo "## Skyblocker 1.10.0"
           echo ""
           echo "## Changelog"
-          echo "${{ steps.read_changelog.outputs.changelog-discord }}"
+          echo "${{ steps.read_changelog.outputs.changelog_discord }}"
           echo ":inbox_tray: Download latest version on Modrinth or Github:"
           echo "<:modrinth:900697862206287882> <link1>"
           echo "<:github:900697885706952725> <link2>"

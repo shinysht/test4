@@ -1,20 +1,96 @@
-# Release 1.9.1
+# Release 1.11.0
+
+## Highlight
+* Crimson Isle, Rift, Garden visitor Tab Hud Improvements by @AzureAaron
+* Fairy Souls Helper by @kevinthegreat1
+* Experiments Solvers by @kevinthegreat1
+* Mirrorverse Waypoints by @AzureAaron
+* Implement Vampire Slayer Features by @Futuremappermydud
 
 ## What's Changed
-* Fix trivia solver glitch by @TheColdPot in https://github.com/SkyblockerMod/Skyblocker/pull/89
-* optimize Dwarven HUD & add draggable config by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/93
-* Use official hypixel wiki for WikiLookup by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/94
-* Corrections + Update by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/99
-* Fix Fetchur solver not working by adding typo'ed variant by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/100
-* Update GSON and remove old adapter by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/95
+* Rename zh_Hant.json to zh_tw.json by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/178
+* Add sound notification to fishing helper by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/179
+* 1.20 Port by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/150
+* Crimson Isle Tab Hud Improvements by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/183
+* DiscordRPC bug fixes and improvements by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/184
+* Fairy Souls Helper by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/167
+* Added Rift Tab Hud + 1 Rift related fix by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/185
+* Fix recipe book search field not being selectable by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/187
+* Fix chat ad filter by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/188
+* Workflow fix discord character limit by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/180
+* Experiments Solvers by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/186
+* Add Mirrorverse Waypoints + Rift Fixes by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/189
+* Implement Vampire Slayer Features by @Futuremappermydud in https://github.com/SkyblockerMod/Skyblocker/pull/191
+* Add Reparty Auto Rejoin by @koloiyolo in https://github.com/SkyblockerMod/Skyblocker/pull/176
+* Add Motes Price Tooltip by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/192
+* Fix dragged items not rendering by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/193
+* Add Vampire Minion by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/194
+* Title container by @Futuremappermydud in https://github.com/SkyblockerMod/Skyblocker/pull/196
+* Loom 1.3 by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/197
+* Clean up by @TacoMonkey11 in https://github.com/SkyblockerMod/Skyblocker/pull/151
+* Truncate text in the recipe book by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/198
+* Sort + Colourize Blessings by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/200
+* Skyblock Levels fixes + Tab Hud improvements by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/201
+* Rendering Improvements, Fixes + Occlusion Culling by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/204
+* Item fixer upper rewrite by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/203
+* Shortcuts by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/195
+* Add Dark Auction Tab Hud by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/205
+* Fix ads filter triggering when it shouldn't by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/206
+* Add show off message filter by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/207
+* Garden Tab Hud Improvements by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/208
+* Hide spammed warnings by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/209
+* Fix hotbar lock rendering mixin by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/211
+* Add new trophy fishing emblem by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/212
 
 ## New Contributors
-* @TheColdPot made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/89
-* @Julienraptor01 made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/99
-* @MiraculixxT made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/111
+* @Futuremappermydud made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/191
+* @koloiyolo made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/176
 
-**Full Changelog**: https://github.com/SkyblockerMod/Skyblocker/compare/v1.8.2...v1.9.0
+**Full Changelog**: https://github.com/SkyblockerMod/Skyblocker/compare/v1.10.0...v1.11.0
 
+___
+# Release 1.10.0
+
+## Highlight
+* Custom Tab HUD by @msg-programs in https://github.com/SkyblockerMod/Skyblocker/pull/137
+* Fishing Helper by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/157
+* REI Compatibility by @lantice3720 in https://github.com/SkyblockerMod/Skyblocker/pull/148
+* Barn solvers by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/134
+
+## What's Changed
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/142
+* Barn solvers by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/134
+* Dungeon map scale adjustment customization  by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/127
+* Add option to hide empty tooltips in inventories. by @msg-programs in https://github.com/SkyblockerMod/Skyblocker/pull/135
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/144
+* There is now 240 fairy souls! by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/138
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/149
+* minor updates by @Fix3dll in https://github.com/SkyblockerMod/Skyblocker/pull/122
+* Migrated to ClientReceiveMessageEvents and some fixes by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/131
+* Renamed container package to gui and added docs by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/145
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/153
+* REI Compatibility by @lantice3720 in https://github.com/SkyblockerMod/Skyblocker/pull/148
+* Api migration, config command, and cleanup by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/154
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/155
+* Refactors & docs by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/156
+* return instead of assign by @Fix3dll in https://github.com/SkyblockerMod/Skyblocker/pull/158
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/159
+* Add Fishing Helper by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/157
+* Update Loom and Gradle by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/163
+* Livid color by @kevinthegreat1 in https://github.com/SkyblockerMod/Skyblocker/pull/162
+* fix repository update by @Fix3dll in https://github.com/SkyblockerMod/Skyblocker/pull/165
+* remove backup LBIN server because it desn't exist anymore by @Julienraptor01 in https://github.com/SkyblockerMod/Skyblocker/pull/168
+* fixing missing strings by @PumpkinXD in https://github.com/SkyblockerMod/Skyblocker/pull/170
+* Translations update from hysky translate by @LifeIsAParadox in https://github.com/SkyblockerMod/Skyblocker/pull/166
+* Replace tab/playerlist HUD with a more fancy version by @msg-programs in https://github.com/SkyblockerMod/Skyblocker/pull/137
+* Add Dungeon Map Placement Screen by @AzureAaron in https://github.com/SkyblockerMod/Skyblocker/pull/169
+
+## New Contributors
+* @msg-programs made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/135
+* @lantice3720 made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/148
+* @PumpkinXD made their first contribution in https://github.com/SkyblockerMod/Skyblocker/pull/170
+
+**Full Changelog**: https://github.com/SkyblockerMod/Skyblocker/compare/v1.9.0...v1.10.0
 ___
 # Release 1.9.0
 

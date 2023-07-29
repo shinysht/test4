@@ -22,6 +22,9 @@ jobs:
         run: |
           CHANGELOG=$(sed '/___/Q' CHANGELOG.md)
           CHANGELOG=$(echo "$CHANGELOG" | sed 1d)
+          
+          echo "::set-output name=changelog::$CHANGELOG"
+          
           echo "Changelog:\n$CHANGELOG"
           changelog="${CHANGELOG}"
           # Because of the 2000 char limit in Discord shorten the changelog
@@ -50,15 +53,14 @@ jobs:
               modified_changelog=$(echo "$modified_changelog" | sed -e 's/@//g' -e 's|https\?://[^[:space:]]*|<\0>|g')
           
           # Store the modified_changelog in the CHANGELOG variable
-          CHANGELOG_discord=$(echo -n "$modified_changelog")
+          CHANGELOG=$(echo -n "$modified_changelog")
           fi
           
-          CHANGELOG_discord="${CHANGELOG_discord//'%'/'%25'}"
-          CHANGELOG_discord="${CHANGELOG_discord//$'\n'/'%0A'}"
-          CHANGELOG_discord="${CHANGELOG_discord//$'\r'/'%0D'}"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           
-          echo "::set-output name=changelog::$CHANGELOG"
-
+          echo "::set-output name=changelog_discord::$CHANGELOG"
 
       - name: Changelog output
         shell: bash

@@ -62,6 +62,11 @@ jobs:
           
           echo "::set-output name=changelog_discord::$CHANGELOG"
 
+      - name: Changelog output other
+        shell: bash
+        run: |
+          echo "${{ steps.read_changelog.outputs.changelog }}"
+          
       - name: Changelog output
         shell: bash
         run: |
@@ -75,8 +80,3 @@ jobs:
           echo "<:github:900697885706952725> <link2>"
           echo ""
           echo "<https://hysky.de/>"
-          
-      - name: Changelog output other
-        shell: bash
-        run: |
-          echo "${{ steps.read_changelog.outputs.changelog }}"

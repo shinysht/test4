@@ -57,8 +57,8 @@ jobs:
           CHANGELOG_discord="${CHANGELOG_discord//$'\n'/'%0A'}"
           CHANGELOG_discord="${CHANGELOG_discord//$'\r'/'%0D'}"
           
-          echo "::set-output name=changelog::$changelog"
-          echo "::set-output name=changelog_discord::$CHANGELOG_discord"
+          echo "changelog=$changelog" >> "$GITHUB_OUTPUT"
+          echo "changelog_discord=$CHANGELOG_discord" >> "$GITHUB_OUTPUT"
 
       - name: Changelog output
         shell: bash

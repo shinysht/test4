@@ -22,5 +22,6 @@ jobs:
         shell: bash
         run: |
           echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }} Version: ${{ github.event.release.tag_name }}"
-          insert_content="${{ github.event.release.name }}\\n${{ github.event.release.body }}\\n___"
+          changelog_content=$(echo "${{ github.event.release.body }}" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g; s/\*/\\*/g')
+          insert_content="${{ github.event.release.name }}\\n${changelog_content}\\n___"
           sed -i "1i $(printf '%s\n' "${insert_content}")" CHANGELOG.md

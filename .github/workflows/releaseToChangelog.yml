@@ -22,3 +22,4 @@ jobs:
         shell: bash
         run: |
           echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }} Version: ${{ github.event.release.tag_name }}"
+          sed  -i "1i ${{ github.event.release.name }}\n${{ github.event.release.body }}\n___" CHANGELOG.md

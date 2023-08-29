@@ -21,4 +21,4 @@ jobs:
         id: read_changelog
         shell: bash
         run: |
-          echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }} Version: ${{ github.event.release }}"
+          echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }} Version: ${{ github.event.release.tag_name }}"

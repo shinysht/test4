@@ -30,4 +30,4 @@ jobs:
           git config --local user.email "spam2@posteo.de"
 
           git add .
-          git commit -m "Release ${{ github.event.release.tag_name:1 }}"
+          git commit -m "Release ${{ github.event.release.name }}"

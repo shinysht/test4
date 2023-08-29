@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release to Changelog Release
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Read Changelog
+        id: read_changelog
+        shell: bash
+        run: |
+          echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }} Version: ${{ github.event.release }}"

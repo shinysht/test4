@@ -25,3 +25,9 @@ jobs:
           changelog_content=$(echo "${{ github.event.release.body }}" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g; s/\*/\\*/g')
           insert_content="${{ github.event.release.name }}\\n${changelog_content}\\n___"
           sed -i "1i $(printf '%s\n' "${insert_content}")" CHANGELOG.md
+          
+          git config --local user.name actions-user
+          git config --local user.email "spam2@posteo.de"
+
+          git add .
+          git commit -m "Release ${{ github.event.release.tag_name:1 }}"

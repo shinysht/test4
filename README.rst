@@ -1,1 +1,1 @@
-.. include:: ./FEATURES.rst
+.. include:: FEATURES.rst

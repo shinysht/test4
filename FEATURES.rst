@@ -2,7 +2,7 @@ Dungeon Features:
 ~~~~~~~~~~~~~~~~~
 
 -  **Secrets Waypoint Highlight:** Fully configurable
--  **Minimap**
+-  **Minimap**2
 -  **Starred Mob Glow**
 -  **Croesus Helper**
 -  **Puzzle Solver:**

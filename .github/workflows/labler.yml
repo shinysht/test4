@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   pull_request_review:
-    types: [submitted]
+    types: [submitted, dismissed]
 
 jobs:
   labeler:
@@ -19,6 +19,7 @@ jobs:
         script: |
           const { owner, repo, number: pull_number } = context.issue;
           const { data: pullRequest } = await github.rest.pulls.get({ owner, repo, pull_number });
+          const labels = pullRequest.data.labels.map(label => label.name);
 
           const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
           const approved = reviews.some(review => review.state === 'APPROVED');
@@ -40,28 +41,31 @@ jobs:
             label = 'changes requested';
           }
 
-          // list of labels to be removed
-          const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'wip', 'changes requested'];
-
-          // remove all label from list
-          const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pull_number });
-          for (const { name } of currentLabels) {
-            if (labelsToRemove.includes(name)) {
-              await github.rest.issues.removeLabel({
+          // if label is not set change the label
+          if (!labels.includes(label)) {
+            // list of labels to be removed
+            const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'wip', 'changes requested'];
+            
+            // remove all label from list
+            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pull_number });
+            for (const { name } of currentLabels) {
+              if (labelsToRemove.includes(name)) {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number: pull_number,
+                  name
+                });
+              }
+            }
+            
+            // add label
+            if (label) {
+              await github.rest.issues.addLabels({
                 owner,
                 repo,
                 issue_number: pull_number,
-                name
+                labels: [label]
               });
             }
-          }
-
-          // add label
-          if (label) {
-            await github.rest.issues.addLabels({
-              owner,
-              repo,
-              issue_number: pull_number,
-              labels: [label]
-            });
           }

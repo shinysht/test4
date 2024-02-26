@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set Labels
-      uses: actions/github-script@v5
+      uses: actions/github-script@v7
       with:
         script: |
           const { owner, repo, number: pull_number } = context.issue;
@@ -23,7 +23,7 @@ jobs:
           let label = '';
 
           if (pullRequest.title.toLowerCase().includes('wip')) {
-            label = 'WIP';
+            label = 'wip';
           } else if (pullRequest.draft) {
             label = 'reviews needed';
           } else if (pullRequest.mergeable_state === 'dirty') {
@@ -39,10 +39,10 @@ jobs:
             }
           }
 
-          // List of labels to be removed
-          const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'WIP', 'changes requested'];
+          // list of labels to be removed
+          const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'wip', 'changes requested'];
 
-          // Remove all current labels that are in the list of labels to be removed
+          // remove all label from list
           const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pull_number });
           for (const { name } of currentLabels) {
             if (labelsToRemove.includes(name)) {
@@ -55,7 +55,7 @@ jobs:
             }
           }
 
-          // Add the new label
+          // add label
           if (label) {
             await github.rest.issues.addLabels({
               owner,

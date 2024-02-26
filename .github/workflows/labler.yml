@@ -20,25 +20,24 @@ jobs:
           const { owner, repo, number: pull_number } = context.issue;
           const { data: pullRequest } = await github.rest.pulls.get({ owner, repo, pull_number });
 
+          const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
+          const approved = reviews.some(review => review.state === 'APPROVED');
+          const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
+
           let label = '';
-          console.log(`${pullRequest}`)
-          if (pullRequest.draft) {
-            label = 'wip';
-          } else if (!pullRequest.draft) {
-            label = 'reviews needed';
-          } else if (pullRequest.mergeable_state === 'dirty') {
-            label = 'merge conflicts';
-          } else if (pullRequest.state === 'closed') {
-            label = '';
-          }else {
-            const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
-            const approved = reviews.some(review => review.state === 'APPROVED');
-            const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
-            if (approved) {
-              label = 'merge me please';
-            } else if (changesRequested) {
-              label = 'changes requested';
+
+          if (approved) {
+            label = 'merge me please';
+          } else if (!approved) {
+            if (pullRequest.draft) {
+              label = 'wip';
+            } else if (!pullRequest.draft) {
+              label = 'reviews needed';
+            } else if (pullRequest.mergeable_state === 'dirty') {
+              label = 'merge conflicts';
             }
+          } else if (changesRequested) {
+            label = 'changes requested';
           }
 
           // list of labels to be removed

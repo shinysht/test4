@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   pull_request_review:
-    types: [submitted]
+    types: [submitted, dismissed]
 
 jobs:
   labeler:
@@ -19,49 +19,53 @@ jobs:
         script: |
           const { owner, repo, number: pull_number } = context.issue;
           const { data: pullRequest } = await github.rest.pulls.get({ owner, repo, pull_number });
-
-          const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
-          const approved = reviews.some(review => review.state === 'APPROVED');
-          const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
+          const labels = pullRequest.labels.map(label => label.name);
 
           let label = '';
 
-          if (approved) {
-            label = 'merge me please';
-          } else if (!approved) {
-            if (pullRequest.draft) {
-              label = 'wip';
-            } else if (!pullRequest.draft) {
+          if (pullRequest.draft) {
+            label = 'wip';
+          } else if (pullRequest.mergeable_state === 'dirty') {
+            label = 'merge conflicts';
+          } else {
+            const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
+            const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
+            const approved = reviews.some(review => review.state === 'APPROVED');
+
+            if (changesRequested) {
+              label = 'changes requested';
+            } else if (approved) {
+              label = 'merge me please';
+            } else {
               label = 'reviews needed';
-            } else if (pullRequest.mergeable_state === 'dirty') {
-              label = 'merge conflicts';
             }
-          } else if (changesRequested) {
-            label = 'changes requested';
           }
 
-          // list of labels to be removed
-          const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'wip', 'changes requested'];
-
-          // remove all label from list
-          const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pull_number });
-          for (const { name } of currentLabels) {
-            if (labelsToRemove.includes(name)) {
-              await github.rest.issues.removeLabel({
+          // if label is not set change the label
+          if (!labels.includes(label)) {
+            // list of labels to be removed
+            const labelsToRemove = ['merge me please', 'reviews needed', 'merge conflicts', 'wip', 'changes requested'];
+            
+            // remove all label from list
+            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pull_number });
+            for (const { name } of currentLabels) {
+              if (labelsToRemove.includes(name)) {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number: pull_number,
+                  name
+                });
+              }
+            }
+            
+            // add label
+            if (label) {
+              await github.rest.issues.addLabels({
                 owner,
                 repo,
                 issue_number: pull_number,
-                name
+                labels: [label]
               });
             }
-          }
-
-          // add label
-          if (label) {
-            await github.rest.issues.addLabels({
-              owner,
-              repo,
-              issue_number: pull_number,
-              labels: [label]
-            });
           }

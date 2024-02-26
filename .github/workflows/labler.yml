@@ -19,26 +19,26 @@ jobs:
         script: |
           const { owner, repo, number: pull_number } = context.issue;
           const { data: pullRequest } = await github.rest.pulls.get({ owner, repo, pull_number });
-          const labels = pullRequest.data.labels.map(label => label.name);
-
-          const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
-          const approved = reviews.some(review => review.state === 'APPROVED');
-          const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
+          const labels = pullRequest.labels.map(label => label.name);
 
           let label = '';
 
-          if (approved) {
-            label = 'merge me please';
-          } else if (!approved) {
-            if (pullRequest.draft) {
-              label = 'wip';
-            } else if (!pullRequest.draft) {
+          if (pullRequest.draft) {
+            label = 'wip';
+          } else if (pullRequest.mergeable_state === 'dirty') {
+            label = 'merge conflicts';
+          } else {
+            const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
+            const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
+            const approved = reviews.some(review => review.state === 'APPROVED');
+
+            if (changesRequested) {
+              label = 'changes requested';
+            } else if (approved) {
+              label = 'merge me please';
+            } else {
               label = 'reviews needed';
-            } else if (pullRequest.mergeable_state === 'dirty') {
-              label = 'merge conflicts';
             }
-          } else if (changesRequested) {
-            label = 'changes requested';
           }
 
           // if label is not set change the label

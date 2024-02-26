@@ -21,7 +21,7 @@ jobs:
           const { data: pullRequest } = await github.rest.pulls.get({ owner, repo, pull_number });
 
           let label = '';
-
+          console.log(`${pullRequest}`)
           if (pullRequest.title.toLowerCase().includes('wip')) {
             label = 'wip';
           } else if (pullRequest.draft) {

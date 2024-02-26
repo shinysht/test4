@@ -22,13 +22,15 @@ jobs:
 
           let label = '';
           console.log(`${pullRequest}`)
-          if (pullRequest.title.toLowerCase().includes('wip')) {
+          if (pullRequest.draft) {
             label = 'wip';
-          } else if (pullRequest.draft) {
+          } else if (!pullRequest.draft) {
             label = 'reviews needed';
           } else if (pullRequest.mergeable_state === 'dirty') {
             label = 'merge conflicts';
-          } else {
+          } else if (pullRequest.state === 'closed') {
+            label = '':
+          }else {
             const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
             const approved = reviews.some(review => review.state === 'APPROVED');
             const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');

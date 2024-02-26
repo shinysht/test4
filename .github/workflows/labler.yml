@@ -2,7 +2,7 @@ name: Automatic Labeling
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft, closed]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -27,6 +27,8 @@ jobs:
             label = 'wip';
           } else if (pullRequest.mergeable_state === 'dirty') {
             label = 'merge conflicts';
+          } else if (pullRequest.merged) {
+            label = ''
           } else {
             const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
             const { data: commits } = await github.rest.pulls.listCommits({ owner, repo, pull_number });

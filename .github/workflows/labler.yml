@@ -29,15 +29,17 @@ jobs:
             label = 'merge conflicts';
           } else {
             const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number });
-            const changesRequested = reviews.some(review => review.state === 'CHANGES_REQUESTED');
-            const approved = reviews.some(review => review.state === 'APPROVED');
+            const { data: commits } = await github.rest.pulls.listCommits({ owner, repo, pull_number });
 
-            if (changesRequested) {
-              label = 'changes requested';
-            } else if (approved) {
-              label = 'merge me please';
-            } else {
+            const lastReview = reviews.sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at))[0];
+            const lastCommit = commits.sort((a, b) => new Date(b.commit.committer.date) - new Date(a.commit.committer.date))[0];
+
+            if (!lastReview || new Date(lastReview.submitted_at) < new Date(lastCommit.commit.committer.date)) {
               label = 'reviews needed';
+            } else if (lastReview.state === 'CHANGES_REQUESTED') {
+              label = 'changes requested';
+            } else if (lastReview.state === 'APPROVED') {
+              label = 'merge me please';
             }
           }
 

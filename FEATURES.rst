@@ -3,7 +3,7 @@ sd
 as
 
 s
-d
+ds
 w
 da
 sd
